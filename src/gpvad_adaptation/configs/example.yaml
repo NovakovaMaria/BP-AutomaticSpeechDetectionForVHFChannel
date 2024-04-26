@@ -1,0 +1,22 @@
+data: csv_labels/augm.csv
+label: softlabels/csv/augm.csv
+batch_size: 64
+data_args:
+    mode: Null
+num_workers: 8
+optimizer: AdamW
+optimizer_args:
+    lr: 0.01
+scheduler_args:
+    patience: 10
+    factor: 0.1
+early_stop: 10
+epochs: 100
+itercv: 10000
+save: best
+model: CRNN
+model_args: {}
+outputpath: experiments/
+transforms: [timemask, freqmask]
+loss: FrameBCELoss
+pretrained: pretrained_models/sre/model.pth

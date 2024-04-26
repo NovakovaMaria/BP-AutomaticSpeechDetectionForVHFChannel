@@ -1,0 +1,170 @@
+[2023-04-30 15:47:51] Storing files in experiments/CRNN/2023-04-30_15-47-04_99c46c06e75d11ed82a5d595a18de4ee
+[2023-04-30 15:47:51] batch_size: 64
+[2023-04-30 15:47:51] data: data/csv_labels/augm.csv
+[2023-04-30 15:47:51] data_args:
+[2023-04-30 15:47:51]   mode: null
+[2023-04-30 15:47:51] early_stop: 10
+[2023-04-30 15:47:51] epochs: 100
+[2023-04-30 15:47:51] itercv: 10000
+[2023-04-30 15:47:51] label: data/softlabels/csv/augm.csv
+[2023-04-30 15:47:51] label_type: soft
+[2023-04-30 15:47:51] loss: FrameBCELoss
+[2023-04-30 15:47:51] model: CRNN
+[2023-04-30 15:47:51] model_args: {}
+[2023-04-30 15:47:51] num_workers: 8
+[2023-04-30 15:47:51] optimizer: AdamW
+[2023-04-30 15:47:51] optimizer_args:
+[2023-04-30 15:47:51]   lr: 0.01
+[2023-04-30 15:47:51] outputpath: experiments/
+[2023-04-30 15:47:51] postprocessing: double
+[2023-04-30 15:47:51] pretrained: pretrained_models/sre/model.pth
+[2023-04-30 15:47:51] save: best
+[2023-04-30 15:47:51] scheduler_args:
+[2023-04-30 15:47:51]   factor: 0.1
+[2023-04-30 15:47:51]   patience: 10
+[2023-04-30 15:47:51] threshold: null
+[2023-04-30 15:47:51] transforms:
+[2023-04-30 15:47:51] - timemask
+[2023-04-30 15:47:51] - freqmask
+[2023-04-30 15:47:51] 
+[2023-04-30 15:47:51] Running on device cpu
+[2023-04-30 15:47:51] Transforms:
+[2023-04-30 15:47:51] Sequential(
+[2023-04-30 15:47:51]   (0): TimeMask()
+[2023-04-30 15:47:51]   (1): FreqMask()
+[2023-04-30 15:47:51] )
+[2023-04-30 15:47:51] Loading pretrained model pretrained_models/sre/model.pth
+[2023-04-30 15:47:51] AdamW (
+[2023-04-30 15:47:51] Parameter Group 0
+[2023-04-30 15:47:51]     amsgrad: False
+[2023-04-30 15:47:51]     betas: (0.9, 0.999)
+[2023-04-30 15:47:51]     capturable: False
+[2023-04-30 15:47:51]     differentiable: False
+[2023-04-30 15:47:51]     eps: 1e-08
+[2023-04-30 15:47:51]     foreach: None
+[2023-04-30 15:47:51]     fused: None
+[2023-04-30 15:47:51]     lr: 0.01
+[2023-04-30 15:47:51]     maximize: False
+[2023-04-30 15:47:51]     weight_decay: 0.01
+[2023-04-30 15:47:51] )
+[2023-04-30 15:47:51] CRNN(
+[2023-04-30 15:47:51]   (features): Sequential(
+[2023-04-30 15:47:51]     (0): Block2D(
+[2023-04-30 15:47:51]       (block): Sequential(
+[2023-04-30 15:47:51]         (0): BatchNorm2d(1, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+[2023-04-30 15:47:51]         (1): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+[2023-04-30 15:47:51]         (2): LeakyReLU(negative_slope=0.1, inplace=True)
+[2023-04-30 15:47:51]       )
+[2023-04-30 15:47:51]     )
+[2023-04-30 15:47:51]     (1): LPPool2d(norm_type=4, kernel_size=(2, 4), stride=None, ceil_mode=False)
+[2023-04-30 15:47:51]     (2): Block2D(
+[2023-04-30 15:47:51]       (block): Sequential(
+[2023-04-30 15:47:51]         (0): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+[2023-04-30 15:47:51]         (1): Conv2d(32, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+[2023-04-30 15:47:51]         (2): LeakyReLU(negative_slope=0.1, inplace=True)
+[2023-04-30 15:47:51]       )
+[2023-04-30 15:47:51]     )
+[2023-04-30 15:47:51]     (3): Block2D(
+[2023-04-30 15:47:51]       (block): Sequential(
+[2023-04-30 15:47:51]         (0): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+[2023-04-30 15:47:51]         (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+[2023-04-30 15:47:51]         (2): LeakyReLU(negative_slope=0.1, inplace=True)
+[2023-04-30 15:47:51]       )
+[2023-04-30 15:47:51]     )
+[2023-04-30 15:47:51]     (4): LPPool2d(norm_type=4, kernel_size=(2, 4), stride=None, ceil_mode=False)
+[2023-04-30 15:47:51]     (5): Block2D(
+[2023-04-30 15:47:51]       (block): Sequential(
+[2023-04-30 15:47:51]         (0): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+[2023-04-30 15:47:51]         (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+[2023-04-30 15:47:51]         (2): LeakyReLU(negative_slope=0.1, inplace=True)
+[2023-04-30 15:47:51]       )
+[2023-04-30 15:47:51]     )
+[2023-04-30 15:47:51]     (6): Block2D(
+[2023-04-30 15:47:51]       (block): Sequential(
+[2023-04-30 15:47:51]         (0): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+[2023-04-30 15:47:51]         (1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+[2023-04-30 15:47:51]         (2): LeakyReLU(negative_slope=0.1, inplace=True)
+[2023-04-30 15:47:51]       )
+[2023-04-30 15:47:51]     )
+[2023-04-30 15:47:51]     (7): LPPool2d(norm_type=4, kernel_size=(1, 4), stride=None, ceil_mode=False)
+[2023-04-30 15:47:51]     (8): Dropout(p=0.3, inplace=False)
+[2023-04-30 15:47:51]   )
+[2023-04-30 15:47:51]   (gru): GRU(128, 128, batch_first=True, bidirectional=True)
+[2023-04-30 15:47:51]   (temp_pool): LinearSoftPool()
+[2023-04-30 15:47:51]   (outputlayer): Linear(in_features=256, out_features=2, bias=True)
+[2023-04-30 15:47:51]   (outputlayer1): Linear(in_features=256, out_features=2, bias=True)
+[2023-04-30 15:47:51] )
+[2023-04-30 15:48:39] Validation Results - Epoch : 1     Loss 1.05  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.39  RecallPTT 0.69  AccuracyPTT 0.62 
+[2023-04-30 15:49:28] Validation Results - Epoch : 2     Loss 1.00  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.41  RecallPTT 0.71  AccuracyPTT 0.64 
+[2023-04-30 15:50:19] Validation Results - Epoch : 3     Loss 0.97  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.41  RecallPTT 0.72  AccuracyPTT 0.64 
+[2023-04-30 15:51:10] Validation Results - Epoch : 4     Loss 0.96  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.75  AccuracyPTT 0.65 
+[2023-04-30 15:51:58] Validation Results - Epoch : 5     Loss 0.94  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.76  AccuracyPTT 0.65 
+[2023-04-30 15:52:47] Validation Results - Epoch : 6     Loss 0.94  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.77  AccuracyPTT 0.65 
+[2023-04-30 15:53:36] Validation Results - Epoch : 7     Loss 0.93  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 15:54:26] Validation Results - Epoch : 8     Loss 0.92  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 15:55:15] Validation Results - Epoch : 9     Loss 0.92  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.77  AccuracyPTT 0.65 
+[2023-04-30 15:56:04] Validation Results - Epoch : 10    Loss 0.92  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.74  AccuracyPTT 0.65 
+[2023-04-30 15:56:50] Validation Results - Epoch : 11    Loss 0.92  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 15:57:40] Validation Results - Epoch : 12    Loss 0.91  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.77  AccuracyPTT 0.65 
+[2023-04-30 15:58:28] Validation Results - Epoch : 13    Loss 0.90  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.77  AccuracyPTT 0.65 
+[2023-04-30 15:59:19] Validation Results - Epoch : 14    Loss 0.91  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.77  AccuracyPTT 0.65 
+[2023-04-30 16:00:07] Validation Results - Epoch : 15    Loss 0.90  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:00:56] Validation Results - Epoch : 16    Loss 0.90  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.77  AccuracyPTT 0.65 
+[2023-04-30 16:01:47] Validation Results - Epoch : 17    Loss 0.91  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:02:38] Validation Results - Epoch : 18    Loss 0.90  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:03:30] Validation Results - Epoch : 19    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:04:21] Validation Results - Epoch : 20    Loss 0.90  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.66 
+[2023-04-30 16:05:11] Validation Results - Epoch : 21    Loss 0.90  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.66 
+[2023-04-30 16:06:00] Validation Results - Epoch : 22    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.66 
+[2023-04-30 16:06:50] Validation Results - Epoch : 23    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:07:41] Validation Results - Epoch : 24    Loss 0.90  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:08:32] Validation Results - Epoch : 25    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.66 
+[2023-04-30 16:09:24] Validation Results - Epoch : 26    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.66 
+[2023-04-30 16:10:15] Validation Results - Epoch : 27    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:11:07] Validation Results - Epoch : 28    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:11:58] Validation Results - Epoch : 29    Loss 0.90  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:12:49] Validation Results - Epoch : 30    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.66 
+[2023-04-30 16:13:39] Validation Results - Epoch : 31    Loss 0.90  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:14:31] Validation Results - Epoch : 32    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:15:23] Validation Results - Epoch : 33    Loss 0.90  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.76  AccuracyPTT 0.64 
+[2023-04-30 16:16:15] Validation Results - Epoch : 34    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:17:05] Validation Results - Epoch : 35    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.66 
+[2023-04-30 16:17:55] Validation Results - Epoch : 36    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:18:46] Validation Results - Epoch : 37    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:19:36] Validation Results - Epoch : 38    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:20:28] Validation Results - Epoch : 39    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:21:19] Validation Results - Epoch : 40    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:22:07] Validation Results - Epoch : 41    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.77  AccuracyPTT 0.65 
+[2023-04-30 16:22:57] Validation Results - Epoch : 42    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.66 
+[2023-04-30 16:23:48] Validation Results - Epoch : 43    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:24:39] Validation Results - Epoch : 44    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:25:27] Validation Results - Epoch : 45    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.66 
+[2023-04-30 16:26:17] Validation Results - Epoch : 46    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:27:07] Validation Results - Epoch : 47    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:27:57] Validation Results - Epoch : 48    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:28:46] Validation Results - Epoch : 49    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:29:34] Validation Results - Epoch : 50    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:30:24] Validation Results - Epoch : 51    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:31:15] Validation Results - Epoch : 52    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:32:04] Validation Results - Epoch : 53    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:32:55] Validation Results - Epoch : 54    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.77  AccuracyPTT 0.65 
+[2023-04-30 16:33:46] Validation Results - Epoch : 55    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:34:37] Validation Results - Epoch : 56    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:35:24] Validation Results - Epoch : 57    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:36:07] Validation Results - Epoch : 58    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:36:48] Validation Results - Epoch : 59    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:37:16] Validation Results - Epoch : 59    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:38:02] Validation Results - Epoch : 60    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:38:47] Validation Results - Epoch : 61    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:39:31] Validation Results - Epoch : 62    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:40:16] Validation Results - Epoch : 63    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:41:01] Validation Results - Epoch : 64    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:41:45] Validation Results - Epoch : 65    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:42:30] Validation Results - Epoch : 66    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.66 
+[2023-04-30 16:43:14] Validation Results - Epoch : 67    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:44:00] Validation Results - Epoch : 68    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:44:46] Validation Results - Epoch : 69    Loss 0.89  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.42  RecallPTT 0.78  AccuracyPTT 0.65 
+[2023-04-30 16:45:31] Validation Results - Epoch : 70    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.66 
+[2023-04-30 16:46:15] Validation Results - Epoch : 71    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:47:01] Validation Results - Epoch : 72    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.79  AccuracyPTT 0.66 
+[2023-04-30 16:47:46] Validation Results - Epoch : 73    Loss 0.88  Precision 0.00  Recall 0.00  Accuracy 0.99  PrecisionPTT 0.43  RecallPTT 0.78  AccuracyPTT 0.65 

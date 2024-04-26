@@ -1,0 +1,423 @@
+%==============================================================================
+% Tento soubor použijte jako základ
+% This file should be used as a base for the thesis
+% Autoři / Authors: 2008 Michal Bidlo, 2022 Jaroslav Dytrych
+% Kontakt pro dotazy a připomínky: sablona@fit.vutbr.cz
+% Contact for questions and comments: sablona@fit.vutbr.cz
+%==============================================================================
+% kódování: UTF-8 (zmena prikazem iconv, recode nebo cstocs)
+% encoding: UTF-8 (you can change it by command iconv, recode or cstocs)
+%------------------------------------------------------------------------------
+% zpracování / processing: make, make pdf, make clean
+%==============================================================================
+% Soubory, které je nutné upravit nebo smazat: / Files which have to be edited or deleted:
+%   projekt-20-literatura-bibliography.bib - literatura / bibliography
+%   projekt-01-kapitoly-chapters.tex - obsah práce / the thesis content
+%   projekt-01-kapitoly-chapters-en.tex - obsah práce v angličtině / the thesis content in English
+%   projekt-30-prilohy-appendices.tex - přílohy / appendices
+%   projekt-30-prilohy-appendices-en.tex - přílohy v angličtině / appendices in English
+%==============================================================================
+%\documentclass[english]{fitthesis} % bez zadání - pro začátek práce, aby nebyl problém s překladem
+%\documentclass[english]{fitthesis} % without assignment - for the work start to avoid compilation problem
+%\documentclass[zadani]{fitthesis} % odevzdani do IS VUT a/nebo tisk s barevnými odkazy - odkazy jsou barevné
+\documentclass[english,zadani,enslovak]{fitthesis} % for submission to the IS VUT and/or print with color links - links are color
+%\documentclass[zadani,print]{fitthesis} % pro černobílý tisk - odkazy jsou černé
+%\documentclass[english,zadani,print]{fitthesis} % for the black and white print - links are black
+%\documentclass[zadani,cprint]{fitthesis} % pro barevný tisk - odkazy jsou černé, znak VUT barevný
+%\documentclass[english,zadani,cprint]{fitthesis} % for the print - links are black, logo is color
+% * Je-li práce psaná v anglickém jazyce, je zapotřebí u třídy použít 
+%   parametr english následovně:
+%   If thesis is written in English, it is necessary to use 
+%   parameter english as follows:
+%      \documentclass[english]{fitthesis}
+% * Je-li práce psaná ve slovenském jazyce, je zapotřebí u třídy použít 
+%   parametr slovak následovně:
+%   If the work is written in the Slovak language, it is necessary 
+%   to use parameter slovak as follows:
+%      \documentclass[slovak]{fitthesis}
+% * Je-li práce psaná v anglickém jazyce se slovenským abstraktem apod., 
+%   je zapotřebí u třídy použít parametry english a enslovak následovně:
+%   If the work is written in English with the Slovak abstract, etc., 
+%   it is necessary to use parameters english and enslovak as follows:
+%      \documentclass[english,enslovak]{fitthesis}
+
+% Základní balíčky jsou dole v souboru šablony fitthesis.cls
+% Basic packages are at the bottom of template file fitthesis.cls
+% zde můžeme vložit vlastní balíčky / you can place own packages here
+
+\usepackage[labelfont=bf]{caption}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage[english, longend, linesnumbered, ruled, noline]{algorithm2e}
+\usepackage{dirtree}
+\usepackage{algpseudocode}
+
+% Pro seznam zkratek lze využít balíček Glossaries - nutno odkomentovat i níže a při kompilaci z konzoly i v Makefile (plnou verzi pro Perl, nebo lite)
+% The Glossaries package can be used for the list of abbreviations - it is necessary to uncomment also below. When compiling from the console also in the Makefile (full version for Perl or lite)
+%\usepackage{glossaries}
+%\usepackage{glossary-superragged}
+%\makeglossaries 
+
+% Nastavení cesty k obrázkům
+% Setting of a path to the pictures
+%\graphicspath{{obrazky-figures/}{./obrazky-figures/}}
+%\graphicspath{{obrazky-figures/}{../obrazky-figures/}}
+
+%---rm---------------
+\renewcommand{\rmdefault}{lmr}%zavede Latin Modern Roman jako rm / set Latin Modern Roman as rm
+%---sf---------------
+\renewcommand{\sfdefault}{qhv}%zavede TeX Gyre Heros jako sf
+%---tt------------
+\renewcommand{\ttdefault}{lmtt}% zavede Latin Modern tt jako tt
+
+% vypne funkci šablony, která automaticky nahrazuje uvozovky,
+% aby nebyly prováděny nevhodné náhrady v popisech API apod.
+% disables function of the template which replaces quotation marks
+% to avoid unnecessary replacements in the API descriptions etc.
+\csdoublequotesoff
+
+\usepackage{url}
+
+% =======================================================================
+% balíček "hyperref" vytváří klikací odkazy v pdf, pokud tedy použijeme pdflatex
+% problém je, že balíček hyperref musí být uveden jako poslední, takže nemůže
+% být v šabloně
+% "hyperref" package create clickable links in pdf if you are using pdflatex.
+% Problem is that this package have to be introduced as the last one so it 
+% can not be placed in the template file.
+\ifWis
+\ifx\pdfoutput\undefined % nejedeme pod pdflatexem / we are not using pdflatex
+\else
+  \usepackage{color}
+  \usepackage[unicode,colorlinks,hyperindex,plainpages=false,pdftex]{hyperref}
+  \definecolor{hrcolor-ref}{RGB}{223,52,30}
+  \definecolor{hrcolor-cite}{HTML}{2F8F00}
+  \definecolor{hrcolor-urls}{HTML}{092EAB}
+  \hypersetup{
+	linkcolor=hrcolor-ref,
+	citecolor=hrcolor-cite,
+	filecolor=magenta,
+	urlcolor=hrcolor-urls
+  }
+  \def\pdfBorderAttrs{/Border [0 0 0] }  % bez okrajů kolem odkazů / without margins around links
+  \pdfcompresslevel=9
+\fi
+\else % pro tisk budou odkazy, na které se dá klikat, černé / for the print clickable links will be black
+\ifx\pdfoutput\undefined % nejedeme pod pdflatexem / we are not using pdflatex
+\else
+  \usepackage{color}
+  \usepackage[unicode,colorlinks,hyperindex,plainpages=false,pdftex,urlcolor=black,linkcolor=black,citecolor=black]{hyperref}
+  \definecolor{links}{rgb}{0,0,0}
+  \definecolor{anchors}{rgb}{0,0,0}
+  \def\AnchorColor{anchors}
+  \def\LinkColor{links}
+  \def\pdfBorderAttrs{/Border [0 0 0] } % bez okrajů kolem odkazů / without margins around links
+  \pdfcompresslevel=9
+\fi
+\fi
+% Řešení problému, kdy klikací odkazy na obrázky vedou za obrázek
+% This solves the problems with links which leads after the picture
+\usepackage[all]{hypcap}
+
+
+% Informace o práci/projektu / Information about the thesis
+%---------------------------------------------------------------------------
+\projectinfo{
+  %Prace / Thesis
+  project={BP},            %typ práce BP/SP/DP/DR  / thesis type (SP = term project)
+  year={2023},             % rok odevzdání / year of submission
+  date=\today,             % datum odevzdání / submission date
+  %Nazev prace / thesis title
+  title.cs={Automatická segmentace řeči pro VHF kanál},  % název práce v češtině či slovenštině (dle zadání) / thesis title in czech language (according to assignment)
+  title.en={Automatic Speech Detection \\ for VHF Channel}, % název práce v angličtině / thesis title in english
+  %title.length={14.5cm}, % nastavení délky bloku s titulkem pro úpravu zalomení řádku (lze definovat zde nebo níže) / setting the length of a block with a thesis title for adjusting a line break (can be defined here or below)
+  %sectitle.length={14.5cm}, % nastavení délky bloku s druhým titulkem pro úpravu zalomení řádku (lze definovat zde nebo níže) / setting the length of a block with a second thesis title for adjusting a line break (can be defined here or below)
+  %dectitle.length={14.5cm}, % nastavení délky bloku s titulkem nad prohlášením pro úpravu zalomení řádku (lze definovat zde nebo níže) / setting the length of a block with a thesis title above declaration for adjusting a line break (can be defined here or below)
+  %Autor / Author
+  author.name={Mária},   % jméno autora / author name
+  author.surname={Nováková},   % příjmení autora / author surname 
+  %author.title.p={Bc.}, % titul před jménem (nepovinné) / title before the name (optional)
+  %author.title.a={Ph.D.}, % titul za jménem (nepovinné) / title after the name (optional)
+  %Ustav / Department
+  department={UPGM}, % doplňte příslušnou zkratku dle ústavu na zadání: UPSY/UIFS/UITS/UPGM / fill in appropriate abbreviation of the department according to assignment: UPSY/UIFS/UITS/UPGM
+  % Školitel / supervisor
+  supervisor.name={Igor},   % jméno školitele / supervisor name 
+  supervisor.surname={Szőke},   % příjmení školitele / supervisor surname
+  supervisor.title.p={Ing.},   %titul před jménem (nepovinné) / title before the name (optional)
+  supervisor.title.a={Ph.D.},    %titul za jménem (nepovinné) / title after the name (optional)
+  % Klíčová slova / keywords
+  keywords.cs={detekcia hlasovej aktivity, push-to-talk, veľmi vysokofrekvenčný kanál, python, riadenie letovej prevádzky, umelé neurónové siete, hlboké učenie, konvolučné neurónové siete, konvolučné rekurentné neurónové siete, augmentácia dát, anotácia}, % klíčová slova v českém či slovenském jazyce / keywords in czech or slovak language
+  keywords.en={voice activity detection, push-to-talk, very high-frequency channel, python, air traffic control, artificial neural networks, deep learning, convolutional neural networks, convolutional recurrent neural networks, data augmentation, annotation}, % klíčová slova v anglickém jazyce / keywords in english
+  % Abstrakt / Abstract
+  abstract.cs={Výskyt hluku a~šumu v pozadí audio leteckej komunikácie je problémom, ktorému denne čelia operanti riadenia letovej prevádzky. Aby bola zaistená bezpečná letecká preprava, komunikácia medzi vežou a~lietatlom musí byť čo najefektívnejšia. Hlavnú rolu vo vylepšovaní kvality komunikácie hrá detekcia hlasovej aktivity. Správna detekcia reči je nevyhnutá pre rozpoznanie začiatku komunikácie pre systémy. Začiatok komunikácie začína stlačením tlačítka push-to-talk pomocou rádiového systému. Na rozpoznávanie reči existujú rôzne prístupy a~implementácie. Za pomoci neurónových sietí sa dá detekcia reči upresniť. Výhodou používania umelej inteligencie je jej adaptácia na nové podnety. Táto práca ponúka riešenie na detekciu reči a~push-to-talk udalostí v leteckej komunikácií. Navrhnuté riešenia budú evaluované a~porovnané. Na záver, dostupná implementácia GPVAD je prepracovaná na riešenie tohto problému. Strojové učenie má zas a~znova príležitosť predviesť svoje schopnosti.}, % abstrakt v českém či slovenském jazyce / abstract in czech or slovak language
+  abstract.en={A noisy environment in air traffic communication is an unavoidable problem. The communication between the control tower and the pilot should be the most reliable and effective. That is why voice activity detection is crucial for recognising the start of the speech segment of the communicants for automated systems. The speakers take turns providing information by pressing the push-to-talk button. To detect voice activity, various approaches are used. Even though these methods are effective, machine learning can easily outshine them. Neural networks are widely used in voice activity detection as well as in other areas. Properly trained models are efficient and adaptable. In this thesis, a~solution for voice activity detection together with push-to-talk detection is proposed. Proposed models are evaluated and compared. The adaptation of the GPVAD approach is discussed and compared to the proposed models. Neural networks will have their chance to once again prove that they are suitable for any task.}, % abstrakt v anglickém jazyce / abstract in english
+  % Prohlášení (u anglicky psané práce anglicky, u slovensky psané práce slovensky; u projektové praxe lze zakomentovat) / Declaration (for thesis in english should be in english; for project practice can be commented out)
+  %declaration={Prohlašuji, že jsem tuto bakalářskou práci vypracoval samostatně pod vedením pana X...
+%Další informace mi poskytli...
+%Uvedl jsem všechny literární prameny, publikace a další zdroje, ze kterých jsem čerpal.},
+  declaration={I hereby declare that this Bachelor's thesis was prepared as an original work by the author under the supervision of Mr. Ing. Igor Szőke Ph.D.
+ I have listed all the literary sources, publications and other sources, which were used during the preparation of this thesis.},
+  % Poděkování (nepovinné, nejlépe v jazyce práce; nechcete-li, zakomentujte pro skrytí nadpisu) / Acknowledgement (optional, ideally in the language of the thesis; comment out for hiding including heading)
+  %acknowledgment={V této sekci je možno uvést poděkování vedoucímu práce a těm, kteří poskytli odbornou pomoc
+%(externí zadavatel, konzultant apod.).},
+  acknowledgment={First, I would like to express my sincerest thanks to my supervisor, Ing. Igor Szőke Ph.D., for his guidance, advice, and valuable remarks throughout my bachelor's thesis. His feedback has been essential in shaping my research and helping me navigate the challenges of this work. I am grateful for his encouragement to try working with neural networks. Thanks to this experience, I have developed a keen interest in machine learning.
+  
+  Next, I would like to thank my whole family for their understanding and loving support throughout my academic path. I would also like to thank all my friends and school colleagues, especially Diana Maxima Držíková and Michal Vaňo, who have been my biggest mental support and have made my three years at FIT truly memorable.},
+  % Rozšířený abstrakt (cca 3 normostrany) - lze definovat zde nebo níže / Extended abstract (approximately 3 standard pages) - can be defined here or below
+  extendedabstract={
+    Riadenie letovej prevádzky je služba, ktorá poskytuje všetky dôležité operácie na to, aby chod vzdušnej prepravy bol plynulý. Táto služba je poskytovaná pracovníkmi v~kontrolných vežiach, ktorí majú na starosti správnu koordináciu pilotov v~lietadlách. Poskytujú inštrukcie, aby nedošlo ku kolíziam alebo inému nebezpečenstvu. 
+
+    Táto služba by nebola zrealizovateľná bez efektívnej a~rýchlej leteckej komunikácie s~pilotmi. Veža s~lietadlom komunikuje pomocou rádiových systémov na veľmi vysokých frekvenciách. Tento spôsob komunikácie je najpoužívanejší a~funguje na základe sieti vysielačov a~prijímačov. Vyhradené frekvenčné pásmo pre túto komunikáciu je od $118.000$ do $136.975$ Megahertzov. Pilot si v~lietadle naladí správnu frekvenciu na cieľového komunikanta. 
+
+    Metóda komunikácie cez tieto rádiové systémy je efektívna a~pomáha zabezpečovať bezpečnosť leteckej premávky.
+
+    Aby bolo možné cez tieto systémy správne komunikovať, je potrebné s~nimi vedieť detekovať začiatok komunikácie. Začiatok komunikácie v~leteckej doprave je typicky charakterizovaný ako stlačenie push-to-talk tlačítkam, ktoré povolí komunikantovi zdieľať správy. 
+
+    Stlačením tlačítka sa komunikujúci dostáva do prenosového režimu a~môže začať rozprávať. V~rovnakom čase je príjemca zbavený možnosti komunikovať a~môže správu iba prijímuť. Po pustení tlačítka sa znova systém dostáva do stavu čakania na príjem správy. 
+
+    Existujú rôzne metódy a~prístupy k~detekcií rečových segmentov. Niektoré z~týchto metód dokážu detekovať reč aj vo veľmi zašumenom prostredí. 
+    
+    Hlavným cieľom je s~pomocou ATCO2 projektu, ktorý sa zaoberá zbieraním a~spracovaním leteckej komunikácie, je vytvoriť detektor reči a~push-to-talk signálu. Tento detektor môže dopomôcť k~správnej segmentácií a~spracovaniu leteckej komunikácie. Schopnosti takéhoto detektoru môžu byť vylepšené za pomoci strojového učenia. 
+    
+    Neurónové siete predvádzajú svoje schopnosti v~rôznych odvetviach a~je bežne zaužívané ich využívať aj pri detekcií rečovej aktivity. Pozostávajú z~navzájom prepojených vrstiev, ktoré transformujú vstup na požadovaný výstup. Na to, aby sa pomocou umelej inteligencie dali detekovať udalosti v~leteckej komunikácií je nevyhnutné mať veľa rôznych dát, na ktorých sa môže sieť učiť. 
+
+    Dátová sada na riešenie tohoto problému bola poskytnutá a~vytvorená ATCO2 projektom. Nahrávky v~dátovej sade obsahujú 4 hodiny leteckej komunikácie z~rôznych letísk. 
+
+    Poskytnutá sada obsahuje zároveň aj manuálne prepisy rečových udalostí. Tieto prepisy dokážu zefektívniť proces trénovania neurónovej siete. 
+
+    Proces trénovania neurónových sietí sa dá zjednodušene vyjadriť ako riešenie optimalizačného problému. Na to, aby takéto siete boli schopné vykonávať, čo sa od nich žiada je potrebné, aby si správne nastavili svoje parametre. Tieto parametre sú vypočítané na základe stratovej funkcie, ktorá vypočíta, aký veľký je rozdiel medzi predpoveďou siete a~očakávaným výstupom. 
+
+    Očakávaným výstupom v~kontexte tejto práce bude prestavovať predikcia rečového segmentu alebo push-to-talk udalosti. Kedže očakávané hodnoty pre detekciu reči boli poskytnuté v~ATCO2 datasete, jediným problémom ostáva správne označiť push-to-talk udalosti.
+
+    Algorithmov na detekciu tejto udalosti je veľmi málo. Kedže sa push-to-talk udalosť v~tomto kontexte bude definovať ako náhla silná intenzita signálu, ktorá trvá po dobu 100 milisekúnd, je možné pre túto udalosť definovať dočasný detektor, ktorý poslúži k~automatizácií procesu vytvárania očakávaných výstupov. 
+
+    Navrhnutý algorithmus, ktorý spočíva v~hľadaní lokálnych extrémov, dokáže efektívne detekovať udalosti. Spôsob detekcie udalosti je založený na hľadaní extrémov a~posudzovaní, či spĺňajú jednotlivé podmienky. Podmienka, ktorá kontroluje prechod cez nulovú hodnotu po dobu 100 milisekúnd a~ďaľšia pomienka, ktorá dodatočne kontroluje či je lokalizovaný extrém skutočne extrémom vo svojom najbližšom okolí, vylučujú prebytočné extrémy, ktoré push-to-talk udalosti nereprezentujú.
+
+    Akonáhle sú dáta spracované, je možné začať navrchovať architektúry sietí. V~tejto práci sa používajú dve vlastne navrhnuté architektúry, ktoré sú trénované na detekciu rečových segmentov a~push-to-talk udalostí. Ich zmysel spočíva aj v~tom, že ďaľším cieľom tejto práce bolo nadobudnúť širší obzor o~téme neurónových sietí.
+
+    Tieto siete su trénované na datasete, ktorý je rôzne rozdelený, aby spľňoval očakávaný cieľ. Tri experimenty pre jednoduchú doprednú neurónovu sieť a~jeden pre konvolúčnu neurónovú sieť budú vysvetlené a~porovnané. 
+
+    Jednoduchá neurónová sieť, bola trénovaná jednotlivo na detekciu rečovej aktivity, push-to-talk udalosti a ich kombinácií. Prvý experiment spočíval v~trénovaní neurónovej siete na detekciu iba rečovej aktivity. Bol trénovaný približne na 25 minutách a po piatich iteráciách vedel model správne predpovedať rečové segmenty s~72\% úspešnosťou. Druhý experiment spočíval v~trénovaní siete na push-to-talk detekciu a s~datasetom o~pätnástich minútach vedel správne detekovať udalosti s~96.6\% správnosťou. Posledným experimentom bolo trénovanie siete na obe úlohy naraz, trénovanie skončilo po troch iteráciach na vyvolanie regularizačného prvku ``skoré ukončenie''. Výsledky tohto trénovania sú 64.88\% pre detekciu reči a 94.10\% pre detekciu push-to-talk udalosti. 
+    
+    Posledný experiment bol trénovaný na dátovej sate s~distribúciou medzi jednotlivými triedami 50\% a 50\%  pre rečovú aktivitu a z~celého datasetu 20\% reprezentovalo push-to-talk udalosť. Dataset bol o~veľkosti približne 25 minút. 
+
+    Konvolučná neurónová sieť bola trénovaná iba na detekciu oboch udalostí naraz na rovnakom datasete ako tretí predstavený experiemnt.
+
+    Výsledok trénovania je 96.88\% pre detekciu push-to-talk a 81.99\% pre detekciu hlasovej aktivity. 
+
+    Kedže proces trénovania neurónovej siete je veľmi časovo a~výpočetne náročná udalosť, predtrénovaná sieť GPVAD bude adaptovaná, aby dokázala popri detekcií rečových segmentov detekovať aj push-to-talk udalosti. GPVAD trénovanie na push-to-talk udalosť bolo vykonané na pol hodine nahrávok a výsledkom je 82\% úspešnosť. Dolaďovanie neurónovej siete skončilo s~66\% úspešnosťou. 
+
+    Tieto siete budú do istej miery porovnané a~vyhodnotené. Kedže GPVAD neurónová sieť, bola natrénovaná na tisíckach hodín audia, nie je možné ich priamo porovnať s~výkonom vlastne navrhnutých architektúr. GPVAD sa trénoval na odlišnom datasete za pomoci predtrénovaných váh na detekciu push-to-talk a~nakoniec bola pridaná nová vrstva, aby súčasne model predpovedal rečové segmenty a~push-to-talk udalosti.
+  
+  },
+  %extabstract.odd={true}, % Začít rozšířený abstrakt na liché stránce? / Should extended abstract start on the odd page?
+  faculty={FIT}, % FIT/FEKT/FSI/FA/FCH/FP/FAST/FAVU/USI/DEF
+  faculty.cs={Fakulta informačních technologií}, % Fakulta v češtině - pro využití této položky výše zvolte fakultu DEF / Faculty in Czech - for use of this entry select DEF above
+  faculty.en={Faculty of Information Technology}, % Fakulta v angličtině - pro využití této položky výše zvolte fakultu DEF / Faculty in English - for use of this entry select DEF above
+  department.cs={Ústav počítačové grafiky a multimédií}, % Ústav v češtině - pro využití této položky výše zvolte ústav DEF nebo jej zakomentujte / Department in Czech - for use of this entry select DEF above or comment it out
+  department.en={Department of Computer Graphics and Multimedia} % Ústav v angličtině - pro využití této položky výše zvolte ústav DEF nebo jej zakomentujte / Department in English - for use of this entry select DEF above or comment it out
+}
+
+% Rozšířený abstrakt (cca 3 normostrany) - lze definovat zde nebo výše / Extended abstract (approximately 3 standard pages) - can be defined here or above
+%\extendedabstract{Do tohoto odstavce bude zapsán výtah (abstrakt) práce v českém (slovenském) jazyce.}
+% Začít rozšířený abstrakt na liché stránce? / Should extended abstract start on the odd page?
+%\extabstractodd{true}
+
+% nastavení délky bloku s titulkem pro úpravu zalomení řádku - lze definovat zde nebo výše / setting the length of a block with a thesis title for adjusting a line break - can be defined here or above
+%\titlelength{14.5cm}
+% nastavení délky bloku s druhým titulkem pro úpravu zalomení řádku - lze definovat zde nebo výše / setting the length of a block with a second thesis title for adjusting a line break - can be defined here or above
+%\sectitlelength{14.5cm}
+% nastavení délky bloku s titulkem nad prohlášením pro úpravu zalomení řádku - lze definovat zde nebo výše / setting the length of a block with a thesis title above declaration for adjusting a line break - can be defined here or above
+%\dectitlelength{14.5cm}
+
+% řeší první/poslední řádek odstavce na předchozí/následující stránce
+% solves first/last row of the paragraph on the previous/next page
+\clubpenalty=10000
+\widowpenalty=10000
+
+% checklist
+\newlist{checklist}{itemize}{1}
+\setlist[checklist]{label=$\square$}
+
+% Kompilace po částech (rychlejší, ale v náhledu nemusí být vše aktuální)
+% Compilation piecewise (faster, but not all parts in preview will be up-to-date)
+% Další informace viz / For more information see https://www.overleaf.com/learn/latex/Multi-file_LaTeX_projects
+% \usepackage{subfiles}
+
+% Nechcete-li, aby se u oboustranného tisku roztahovaly mezery pro zaplnění stránky, odkomentujte následující řádek / If you do not want enlarged spacing for filling of the pages in case of duplex printing, uncomment the following line
+% \raggedbottom
+
+\begin{document}
+  % Vysazeni titulnich stran / Typesetting of the title pages
+  % ----------------------------------------------
+  \maketitle
+  % Obsah
+  % ----------------------------------------------
+  \setlength{\parskip}{0pt}
+  \setcounter{tocdepth}{1}{\hypersetup{hidelinks}\tableofcontents}
+  
+  % Seznam obrazku a tabulek (pokud prace obsahuje velke mnozstvi obrazku, tak se to hodi)
+  % List of figures and list of tables (if the thesis contains a lot of pictures, it is good)
+  %\ifczech
+  %  \renewcommand\listfigurename{Seznam obrázků}
+  %\fi
+  %\ifslovak
+  %  \renewcommand\listfigurename{Zoznam obrázkov}
+  %\fi
+  %{\hypersetup{hidelinks}\listoffigures}
+  
+  %\ifczech
+  %  \renewcommand\listtablename{Seznam tabulek}
+  %\fi
+  %\ifslovak
+  %  \renewcommand\listtablename{Zoznam tabuliek}
+  %\fi
+  % {\hypersetup{hidelinks}\listoftables}
+
+  % Seznam zkratek / List of abbreviations
+  %\ifczech
+  %  \renewcommand*\glossaryname{Seznam zkratek}%
+  %  \renewcommand*\entryname{Zkratka}
+  %  \renewcommand*\descriptionname{Význam}
+  %\fi
+  %\ifslovak
+  %  \renewcommand*\glossaryname{Zoznam skratiek}%
+  %  \renewcommand*\entryname{Skratka}
+  %  \renewcommand*\descriptionname{Význam}
+  %\fi
+  %\ifenglish
+  %  \renewcommand*\glossaryname{List of abbreviations}%
+  %  \renewcommand*\entryname{Abbreviation}
+  %  \renewcommand*\descriptionname{Meaning}
+  %\fi
+  % Definice zkratek - z textu se odkazují např. \Gls{TF–IDF}
+  % Definition of abbreviations - referred from the text e.g. \Gls{TF–IDF}
+  %\newglossaryentry{TF–IDF}
+  %{
+  %  name={TF–IDF},
+  %  description={Term Frequency-Inverse Document Frequency}
+  %}
+  % 
+  %\setglossarystyle{superragged}
+  %\printglossaries
+
+
+  \ifODSAZ
+    \setlength{\parskip}{0.5\bigskipamount}
+  \else
+    \setlength{\parskip}{0pt}
+  \fi
+
+  % vynechani stranky v oboustrannem rezimu
+  % Skip the page in the two-sided mode
+  \iftwoside
+    \cleardoublepage
+  \fi
+
+  % Text prace / Thesis text
+  % ----------------------------------------------
+  \ifenglish
+    \input{projekt-01-kapitoly-chapters-en}
+  \else
+    \input{projekt-01-kapitoly-chapters}
+  \fi
+  
+  % Kompilace po částech (viz výše, nutno odkomentovat a zakomentovat input výše)
+  % Compilation piecewise (see above, it is necessary to uncomment it and comment out input above)
+  %\subfile{chapters/projekt-01-uvod-introduction}
+  % ...
+  %\subfile{chapters/projekt-05-zaver-conclusion}
+
+  % Pouzita literatura / Bibliography
+  % ----------------------------------------------
+\ifslovak
+  \makeatletter
+  \def\@openbib@code{\addcontentsline{toc}{chapter}{Literatúra}}
+  \makeatother
+  \bibliographystyle{bib-styles/Pysny/skplain}
+\else
+  \ifczech
+    \makeatletter
+    \def\@openbib@code{\addcontentsline{toc}{chapter}{Literatura}}
+    \makeatother
+    \bibliographystyle{bib-styles/Pysny/czplain}
+  \else 
+    \makeatletter
+    \def\@openbib@code{\addcontentsline{toc}{chapter}{Bibliography}}
+    \makeatother
+    \bibliographystyle{bib-styles/Pysny/enplain}
+  %  \bibliographystyle{alpha}
+  \fi
+\fi
+  \begin{flushleft}
+  \bibliography{projekt-20-literatura-bibliography}
+  \end{flushleft}
+
+  % vynechani stranky v oboustrannem rezimu
+  % Skip the page in the two-sided mode
+  \iftwoside
+    \cleardoublepage
+  \fi
+
+  % Prilohy / Appendices
+  % ---------------------------------------------
+  \appendix
+\ifczech
+  \renewcommand{\appendixpagename}{Přílohy}
+  \renewcommand{\appendixtocname}{Přílohy}
+  \renewcommand{\appendixname}{Příloha}
+\fi
+\ifslovak
+  \renewcommand{\appendixpagename}{Prílohy}
+  \renewcommand{\appendixtocname}{Prílohy}
+  \renewcommand{\appendixname}{Príloha}
+\fi
+%  \appendixpage
+
+% vynechani stranky v oboustrannem rezimu
+% Skip the page in the two-sided mode
+%\iftwoside
+%  \cleardoublepage
+%\fi
+  
+\ifslovak
+%  \section*{Zoznam príloh}
+%  \addcontentsline{toc}{section}{Zoznam príloh}
+\else
+  \ifczech
+%    \section*{Seznam příloh}
+%    \addcontentsline{toc}{section}{Seznam příloh}
+  \else
+%    \section*{List of Appendices}
+%    \addcontentsline{toc}{section}{List of Appendices}
+  \fi
+\fi
+  \startcontents[chapters]
+  \setlength{\parskip}{0pt} 
+  % seznam příloh / list of appendices
+   \printcontents[chapters]{l}{0}{\setcounter{tocdepth}{2}}
+  
+  \ifODSAZ
+    \setlength{\parskip}{0.5\bigskipamount}
+  \else
+    \setlength{\parskip}{0pt}
+  \fi
+  
+  % vynechani stranky v oboustrannem rezimu
+  \iftwoside
+    \cleardoublepage
+  \fi
+  
+  % Přílohy / Appendices
+  \ifenglish
+    \input{projekt-30-prilohy-appendices-en}
+  \else
+    \input{projekt-30-prilohy-appendices}
+  \fi
+  
+  % Kompilace po částech (viz výše, nutno odkomentovat)
+  % Compilation piecewise (see above, it is necessary to uncomment it)
+  %\subfile{projekt-30-prilohy-appendices}
+  
+\end{document}

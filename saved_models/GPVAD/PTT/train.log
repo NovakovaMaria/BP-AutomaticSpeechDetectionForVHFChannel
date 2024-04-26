@@ -1,0 +1,45 @@
+[2023-04-09 20:47:27] Storing files in experiments/CRNN/2023-04-09_20-47-04_f9ab79f0d70611edb7fb51cdfaf2fc43
+[2023-04-09 20:47:27] batch_size: 64
+[2023-04-09 20:47:27] data: data/csv_labels/balanced.csv
+[2023-04-09 20:47:27] data_args:
+[2023-04-09 20:47:27]   mode: null
+[2023-04-09 20:47:27] early_stop: 10
+[2023-04-09 20:47:27] epochs: 50
+[2023-04-09 20:47:27] itercv: 10000
+[2023-04-09 20:47:27] label: data/softlabels/csv/balanced.csv
+[2023-04-09 20:47:27] label_type: soft
+[2023-04-09 20:47:27] loss: FrameBCELoss
+[2023-04-09 20:47:27] model: CRNN
+[2023-04-09 20:47:27] model_args: {}
+[2023-04-09 20:47:27] num_workers: 8
+[2023-04-09 20:47:27] optimizer: AdamW
+[2023-04-09 20:47:27] optimizer_args:
+[2023-04-09 20:47:27]   lr: 0.001
+[2023-04-09 20:47:27] outputpath: experiments/
+[2023-04-09 20:47:27] postprocessing: double
+[2023-04-09 20:47:27] save: best
+[2023-04-09 20:47:27] scheduler_args:
+[2023-04-09 20:47:27]   factor: 0.1
+[2023-04-09 20:47:27]   patience: 10
+[2023-04-09 20:47:27] threshold: null
+[2023-04-09 20:47:27] transforms:
+[2023-04-09 20:47:27] - timemask
+[2023-04-09 20:47:27] - freqmask
+[2023-04-09 20:47:27] 
+[2023-04-09 20:47:27] Running on device cpu
+[2023-04-09 20:47:27] Transforms:
+[2023-04-09 20:47:27] Sequential(
+[2023-04-09 20:47:27]   (0): TimeMask()
+[2023-04-09 20:47:27]   (1): FreqMask()
+[2023-04-09 20:47:27] )
+[2023-04-09 20:47:35] Validation Results - Epoch : 1     Loss 0.52  Precision 0.65  Recall 0.84  Accuracy 0.78  F1 0.73 
+[2023-04-09 20:47:43] Validation Results - Epoch : 2     Loss 0.31  Precision 0.67  Recall 0.94  Accuracy 0.82  F1 0.79 
+[2023-04-09 20:47:50] Validation Results - Epoch : 3     Loss 0.25  Precision 0.68  Recall 0.95  Accuracy 0.82  F1 0.79 
+[2023-04-09 20:47:58] Validation Results - Epoch : 4     Loss 0.25  Precision 0.68  Recall 0.95  Accuracy 0.82  F1 0.79 
+[2023-04-09 20:48:06] Validation Results - Epoch : 5     Loss 0.22  Precision 0.68  Recall 0.95  Accuracy 0.82  F1 0.79 
+[2023-04-09 20:48:14] Validation Results - Epoch : 6     Loss 0.22  Precision 0.68  Recall 0.95  Accuracy 0.82  F1 0.79 
+[2023-04-09 20:48:22] Validation Results - Epoch : 7     Loss 0.23  Precision 0.68  Recall 0.95  Accuracy 0.82  F1 0.79 
+[2023-04-09 20:48:29] Validation Results - Epoch : 8     Loss 0.20  Precision 0.68  Recall 0.95  Accuracy 0.82  F1 0.79 
+[2023-04-09 20:48:37] Validation Results - Epoch : 9     Loss 0.20  Precision 0.68  Recall 0.96  Accuracy 0.83  F1 0.80 
+[2023-04-09 20:48:45] Validation Results - Epoch : 10    Loss 0.26  Precision 0.67  Recall 0.94  Accuracy 0.81  F1 0.78 
+[2023-04-09 20:48:53] Validation Results - Epoch : 11    Loss 0.21  Precision 0.68  Recall 0.95  Accuracy 0.82  F1 0.79 
