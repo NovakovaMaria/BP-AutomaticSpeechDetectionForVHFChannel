@@ -1,4 +1,4 @@
-# Manual for Automatic Speech and Push-To-Talk detection by Maria Novakova
+# Manual for Automatic Speech and Push-To-Talk detection
 
 This manual contains an explanation how to work with source files.
 
